@@ -7,8 +7,15 @@
 \title{TKIepiR: Post-EWAS analysis and visualisation pipeline}
 \description{
 This package includes all steps that we perform post-EWAS in the
-    Diabetes & Obesity group at Telethon Kids. It contains Manhattan and Volcano plots, 
+    Diabetes & Obesity group at the Telethon Kids Institute. It contains Manhattan and Volcano plots, 
     DMR with DMRcate, gene annotation and pathway analysis via methylGSA and missMethyl.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item Report bugs at \url{https://github.com/Hobbeist/TKIepiR/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Sebastian Rauschert \email{Sebastian.Rauschert@telethonkids.org.au}

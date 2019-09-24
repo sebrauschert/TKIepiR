@@ -3,3 +3,4 @@
 export(DMRfinder)
 export(ManhattanPlot)
 export(annotateCpG)
+export(geneSet)
