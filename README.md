@@ -6,8 +6,6 @@ This package includes all steps that we perform post-EWAS in the Diabetes & Obes
 
 ## Installation 
 
-***
-
 The package can be installed via the following command in R or RStudio:  
 
 ```devtools::install_github("Hobbeist/TKIepiR", build_vignettes=T)```
