@@ -6,14 +6,15 @@
 #'
 #' @param EWAS An EWAS results data frame with columns for CpG-ID, p-value, standard error and beta coefficient.
 #' @import IlluminaHumanMethylation450kanno.ilmn12.hg19 
+#' @importFrom minfi getAnnotation
 #' @return \code{annotateCpG} as an data table.
 #' @export
 
 annotateCpG <- function(EWAS){
   
   # Get the annotation for the Illumina 450k
-  data("IlluminaHumanMethylation450kanno.ilmn12.hg19")
-  Annot = getAnnotation(IlluminaHumanMethylation450kanno.ilmn12.hg19)
+  data(IlluminaHumanMethylation450kanno.ilmn12.hg19)
+  Annot = minfi::getAnnotation(IlluminaHumanMethylation450kanno.ilmn12.hg19)
   Annot$ID         <- rownames(Annot)
   rownames(Annot)  <- NULL
   
