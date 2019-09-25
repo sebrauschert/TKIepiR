@@ -11,7 +11,8 @@ Depends: R (>= 3.5),
          IlluminaHumanMethylation450kanno.ilmn12.hg19,
          DMRcate,
          methylGSA,
-         qqman
+         qqman,
+         Hmisc
 biocViews:
 Imports: Hmisc,
          magrittr

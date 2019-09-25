@@ -38,7 +38,7 @@ ManhattanPlot <- function(EWAS, annotate=TRUE, p.column.name=p.column.name, titl
   Mod.Man$P   <- as.numeric(as.character(Mod.Man$P))
 
   # Remove X and Y chromosomes
-  Mod.Man     <- data.frame(subset(Mod.Man, Mod.Man$CHR != is.na))
+  Mod.Man     <- data.frame(subset(Mod.Man, Mod.Man$CHR %nin% NA))
 
   # qqman Manhattan plot function
   qqman::manhattan(Mod.Man, main=title, annotatePval = (0.05/462925),annotateTop=F, col=col.scheme)

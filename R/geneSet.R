@@ -20,7 +20,7 @@
 geneSet <- function(EWAS, p.val.col = p.val.col, minsize = 100, maxsize = 1000, sig.cut = 0.001, plottitle="title", plot.it=FALSE){
   
   EWAS            <- as.data.frame(EWAS)
-  EWAS            <- subset(EWAS, as.numeric(EWAS[,p.val.col]) != is.na)
+  EWAS            <- subset(EWAS, as.numeric(EWAS[,p.val.col]) %nin% NA)
   cpg.pval        <- as.numeric(EWAS[, p.val.col])
   
   names(EWAS)[1] <- "ID"
