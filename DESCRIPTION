@@ -12,7 +12,8 @@ Depends: R (>= 3.5),
          DMRcate,
          methylGSA,
          qqman,
-         Hmisc
+         Hmisc,
+         minfi
 biocViews:
 Imports: Hmisc,
          magrittr
