@@ -13,14 +13,20 @@
 #' 1 standard deviation of Gaussian kernel = 500 base pairs. Should be a lot larger for sequencing data - suggest C=50. Cannot be < 0.2
 #' @param lambda This is according to the \code{DMRcate} package: Gaussian kernel bandwidth for smoothed-function estimation. Also informs DMR bookend definition;
 #' gaps >= lambda between significant CpG sites will be in separate DMRs. Support is truncated at 5*lambda. Default is 1000 nucleotides. See details for further info.
+#' @param pcutoff P-value threshold for selecting significan DMRs
+#' @import IlluminaHumanMethylation450kanno.ilmn12.hg19
+#' @import Hmisc
+#' @importFrom DMRcate dmrcate extractRanges
 #' @return \code{DMRfinder} as a data table.
-#' @examples
-#'  DMRfinder(EWAS)
 #' @export
 
 
 DMRfinder <- function(EWAS, annotate = TRUE, p.val.col = p.val.col, beta.val.col = beta.val.col, se.val.col = se.val.col, C = 2, lambda = 100, pcutoff = 0.001){
-
+  
+  ## In the same source file (to remind you that you did it) add:
+  if(getRversion() >= "2.15.1")  utils::globalVariables("naresid.omit")
+  if(getRversion() >= "3.1.0") utils::suppressForeignCheck("localvariable")
+  
   if (annotate==TRUE){
     EWAS <- as.data.frame(EWAS)
     EWAS <- annotateCpG(EWAS)

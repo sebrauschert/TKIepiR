@@ -7,16 +7,14 @@ Authors@R: person("Sebastian", "Rauschert", email = "Sebastian.Rauschert@teletho
 Description: This package includes all steps that we perform post-EWAS in the
     Diabetes & Obesity group at the Telethon Kids Institute. It contains Manhattan and Volcano plots, 
     DMR with DMRcate, gene annotation and pathway analysis via methylGSA and missMethyl.
-Depends: R (>= 3.5.1),
+Depends: R (>= 3.5)
+Imports: Hmisc,
+         magrittr,
          DMRcate,
          IlluminaHumanMethylation450kanno.ilmn12.hg19,
-         qqman,
          methylGSA,
-         Hmisc
-Imports: missMethyl, 
-         RnBeads, 
-         tidyverse
-License: What license is it under?
+         qqman
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1

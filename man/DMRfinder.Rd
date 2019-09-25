@@ -25,6 +25,8 @@ Empirical testing shows that, for 450k data when lambda=1000, near- optimal pred
 
 \item{lambda}{This is according to the \code{DMRcate} package: Gaussian kernel bandwidth for smoothed-function estimation. Also informs DMR bookend definition;
 gaps >= lambda between significant CpG sites will be in separate DMRs. Support is truncated at 5*lambda. Default is 1000 nucleotides. See details for further info.}
+
+\item{pcutoff}{P-value threshold for selecting significan DMRs}
 }
 \value{
 \code{DMRfinder} as a data table.
@@ -32,7 +34,4 @@ gaps >= lambda between significant CpG sites will be in separate DMRs. Support i
 \description{
 This function is a wrapper for the \code{DMRcate} bioconductor package to identify differentially methylated regions.
 The input needs to be a result file from an EWAS, containing p-values, beta-coefficients and standard errors.
-}
-\examples{
- DMRfinder(EWAS)
 }

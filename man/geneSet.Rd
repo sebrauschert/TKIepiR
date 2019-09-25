@@ -16,12 +16,12 @@ geneSet(EWAS, p.val.col = p.val.col, minsize = 100, maxsize = 1000,
 
 \item{maxsize}{MAximum amount of genes in GO pathway}
 
+\item{sig.cut}{Significance cut off for the gene set enrichment: Only CpGs with a value equal or smaller than this will 
+be included}
+
 \item{plottitle}{Title for the heatmap-barplot, if \code{plot.it} is TRUE}
 
 \item{plot.it}{If true, plot will be returned rather than the table with GO terms}
-
-\item{sig.gut}{Significance cut off for the gene set enrichment: Only CpGs with a value equal or smaller than this will 
-be included}
 }
 \value{
 \code{geneSet} as a data table or heatmap-type barplot.
@@ -29,7 +29,4 @@ be included}
 \description{
 This function is a wrapper for the \code{methylGSA} bioconductor package, which is a very easy to use method
 for gene set enrichment analysis
-}
-\examples{
- geneSet(EWAS)
 }

@@ -1,31 +1,3 @@
-#' Annotate the CpG ID's with genetic information
-#'
-#' This funtion annotates the results of an EWAS with the "IlluminaHumanMethylation450kanno.ilmn12.hg19" package.
-#' The function calls the annotation data frame from the IlluminaHumanMethylation450kanno.ilmn12.hg19 bioconductor package
-#' and returns a new data frame, with all the CpG, gene and location information as well as the EWAS model results
-#'
-#' @param EWAS An EWAS results data frame with columns for CpG-ID, p-value, standard error and beta coefficient.
-#' @return \code{annotateCpG} as an data table.
-#' @examples
-#'  annotateCpG(data)
-#' @export
-
-annotateCpG <- function(EWAS){
-
-  # Get the annotation for the Illumina 450k
-  data("IlluminaHumanMethylation450kanno.ilmn12.hg19")
-  Annot = getAnnotation(IlluminaHumanMethylation450kanno.ilmn12.hg19)
-  Annot$ID         <- rownames(Annot)
-  rownames(Annot)  <- NULL
-
-  # Make sure that the CpG columns is called "ID" for both data frames
-  names(EWAS)[1] <- "ID"
-  EWAS_Model <- merge(Annot, EWAS, by="ID")
-  EWAS_Model
-}
-
-
-
 #' Create a Manhattan plot
 #'
 #'This function utilizes both the \code{annotateCpG()} function of this package, as well as the \code{qqman} CRAN package. It
@@ -37,9 +9,8 @@ annotateCpG <- function(EWAS){
 #' @param p.column.name This specifies the column for the model p-value in the EWAS result file
 #' @param title Specify a title for the Manhattan plot
 #' @param col.scheme Specify two colors for the alternating color scheme of the Manhattan plot
+#' @importFrom qqman manhattan
 #' @return \code{ManhattanPlot} as an image.
-#' @examples
-#'  ManhattanPlot(data)
 #' @export
 
 ManhattanPlot <- function(EWAS, annotate=TRUE, p.column.name=p.column.name, title=title, col.scheme=c("turquoise4", "springgreen4")){
@@ -67,7 +38,7 @@ ManhattanPlot <- function(EWAS, annotate=TRUE, p.column.name=p.column.name, titl
   Mod.Man$P   <- as.numeric(as.character(Mod.Man$P))
 
   # Remove X and Y chromosomes
-  Mod.Man     <- data.frame(subset(Mod.Man, Mod.Man$CHR %nin% NA))
+  Mod.Man     <- data.frame(subset(Mod.Man, Mod.Man$CHR != is.na))
 
   # qqman Manhattan plot function
   qqman::manhattan(Mod.Man, main=title, annotatePval = (0.05/462925),annotateTop=F, col=col.scheme)
