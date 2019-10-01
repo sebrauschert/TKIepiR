@@ -24,8 +24,8 @@
 DMRfinder <- function(EWAS, annotate = TRUE, p.val.col = p.val.col, beta.val.col = beta.val.col, se.val.col = se.val.col, C = 2, lambda = 100, pcutoff = 0.001){
   
   ## In the same source file (to remind you that you did it) add:
-  if(getRversion() >= "2.15.1")  utils::globalVariables("naresid.omit")
-  if(getRversion() >= "3.1.0") utils::suppressForeignCheck("localvariable")
+  #if(getRversion() >= "2.15.1")  utils::globalVariables("naresid.omit")
+  #if(getRversion() >= "3.1.0") utils::suppressForeignCheck("localvariable")
   
   if (annotate==TRUE){
     EWAS <- as.data.frame(EWAS)

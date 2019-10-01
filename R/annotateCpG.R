@@ -21,5 +21,6 @@ annotateCpG <- function(EWAS){
   # Make sure that the CpG columns is called "ID" for both data frames
   names(EWAS)[1] <- "ID"
   EWAS_Model <- merge(Annot, EWAS, by="ID")
+  rm(IlluminaHumanMethylation450kanno.ilmn12.hg19)
   EWAS_Model
 }
