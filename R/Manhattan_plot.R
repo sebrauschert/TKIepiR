@@ -20,6 +20,10 @@ ManhattanPlot <- function(EWAS, annotate=TRUE, p.column.name=p.column.name, titl
     #EWAS1 <- EWAS[-which(EWAS[,1] %in% ""),]
     EWAS <- annotateCpG(EWAS)
   }
+  if (annotate==FALSE){
+    EWAS <- as.data.frame(EWAS[,c("ID", p.column.name)])
+    EWAS <- annotateCpG(EWAS)
+  }
   # We need to extract the following columns for the Manhattan plot, as they are required for the qqman package:
   # a) CpG name
   # b) Nearest Gene

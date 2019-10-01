@@ -31,6 +31,10 @@ DMRfinder <- function(EWAS, annotate = TRUE, p.val.col = p.val.col, beta.val.col
     EWAS <- as.data.frame(EWAS)
     EWAS <- annotateCpG(EWAS)
   }
+  if (annotate==FALSE){
+    EWAS <- as.data.frame(EWAS[,c("ID", p.column.name)])
+    EWAS <- annotateCpG(EWAS)
+  }
   # Prepare a data set to match the format of the dmracte algorithm
   DMRset        <- EWAS[,c("ID", "chr","pos",beta.val.col, p.val.col, se.val.col)]
   DMRset$stat   <- as.numeric(as.character(DMRset[,beta.val.col]))/as.numeric(as.character(DMRset[,se.val.col]))
