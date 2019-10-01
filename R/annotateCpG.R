@@ -15,7 +15,7 @@
 annotateCpG <- function(EWAS){
   
   # Get the annotation for the Illumina 450k
-  data(IlluminaHumanMethylation450kanno.ilmn12.hg19)
+  #data(IlluminaHumanMethylation450kanno.ilmn12.hg19)
   Annot = minfi::getAnnotation(IlluminaHumanMethylation450kanno.ilmn12.hg19)
   Annot$ID         <- rownames(Annot)
   rownames(Annot)  <- NULL
@@ -23,6 +23,5 @@ annotateCpG <- function(EWAS){
   # Make sure that the CpG columns is called "ID" for both data frames
   #names(EWAS)[1] <- "ID"
   EWAS_Model <- merge(Annot, EWAS, by="ID")
-  rm(IlluminaHumanMethylation450kanno.ilmn12.hg19)
   EWAS_Model
 }

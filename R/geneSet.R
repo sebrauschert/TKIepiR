@@ -6,7 +6,7 @@
 #' IMPORTANT: The CpG identifier column needs to be called "ID"!
 #' 
 #' @param EWAS An EWAS results data frame with columns for CpG-ID, p-value, standard error and beta coefficient.
-#' @param p.val.col Columna name for the p-value in the EWAS file
+#' @param p.column.name Columna name for the p-value in the EWAS file
 #' @param minsize Mimimum amount of genes in GO pathway
 #' @param maxsize MAximum amount of genes in GO pathway  
 #' @param sig.cut Significance cut off for the gene set enrichment: Only CpGs with a value equal or smaller than this will 
@@ -19,11 +19,11 @@
 #' @export
 
 
-geneSet <- function(EWAS, p.val.col = p.val.col, minsize = 100, maxsize = 1000, sig.cut = 0.001, plottitle="title", plot.it=FALSE){
+geneSet <- function(EWAS, p.column.name = p.column.name, minsize = 100, maxsize = 1000, sig.cut = 0.001, plottitle="title", plot.it=FALSE){
   
   EWAS            <- as.data.frame(EWAS)
-  EWAS            <- subset(EWAS, as.numeric(EWAS[,p.val.col]) %nin% NA)
-  cpg.pval        <- as.numeric(EWAS[, p.val.col])
+  EWAS            <- subset(EWAS, as.numeric(EWAS[,p.column.name]) %nin% NA)
+  cpg.pval        <- as.numeric(EWAS[, p.column.name])
   
   #names(EWAS)[1] <- "ID"
   names(cpg.pval) <- EWAS$ID

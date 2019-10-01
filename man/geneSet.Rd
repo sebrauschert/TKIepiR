@@ -4,13 +4,14 @@
 \alias{geneSet}
 \title{Gene set enrichment analysis}
 \usage{
-geneSet(EWAS, p.val.col = p.val.col, minsize = 100, maxsize = 1000,
-  sig.cut = 0.001, plottitle = "title", plot.it = FALSE)
+geneSet(EWAS, p.column.name = p.column.name, minsize = 100,
+  maxsize = 1000, sig.cut = 0.001, plottitle = "title",
+  plot.it = FALSE)
 }
 \arguments{
 \item{EWAS}{An EWAS results data frame with columns for CpG-ID, p-value, standard error and beta coefficient.}
 
-\item{p.val.col}{Columna name for the p-value in the EWAS file}
+\item{p.column.name}{Columna name for the p-value in the EWAS file}
 
 \item{minsize}{Mimimum amount of genes in GO pathway}
 

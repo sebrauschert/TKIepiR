@@ -7,9 +7,9 @@
 #' 
 #' @param EWAS An EWAS results data frame with columns for CpG-ID, p-value, standard error and beta coefficient.
 #' @param annotate The default is that the
-#' @param p.val.col The name of the p-value column
-#' @param beta.val.col The name of the beta coefficient column
-#' @param se.val.col The name of the standard error column
+#' @param p.column.name The name of the p-value column
+#' @param beta.column.col The name of the beta coefficient column
+#' @param se.column.col The name of the standard error column
 #' @param C This is as per \code{DMRcate} package: Scaling factor for bandwidth. Gaussian kernel is calculated where lambda/C = sigma.
 #' Empirical testing shows that, for 450k data when lambda=1000, near- optimal prediction of sequencing-derived DMRs is obtained when C is approxi- mately 2, i.e.
 #' 1 standard deviation of Gaussian kernel = 500 base pairs. Should be a lot larger for sequencing data - suggest C=50. Cannot be < 0.2
@@ -23,7 +23,7 @@
 #' @export
 
 
-DMRfinder <- function(EWAS, annotate = TRUE, p.val.col = p.val.col, beta.val.col = beta.val.col, se.val.col = se.val.col, C = 2, lambda = 100, pcutoff = 0.001){
+DMRfinder <- function(EWAS, annotate = TRUE, p.column.name = p.column.name, beta.column.col = beta.column.col, se.column.col = se.column.col, C = 2, lambda = 100, pcutoff = 0.001){
   
   ## In the same source file (to remind you that you did it) add:
   #if(getRversion() >= "2.15.1")  utils::globalVariables("naresid.omit")
@@ -34,13 +34,13 @@ DMRfinder <- function(EWAS, annotate = TRUE, p.val.col = p.val.col, beta.val.col
     EWAS <- annotateCpG(EWAS)
   }
   if (annotate==FALSE){
-    EWAS <- as.data.frame(EWAS[,c("ID", p.column.name, beta.val.col, se.val.col)])
+    EWAS <- as.data.frame(EWAS[,c("ID", p.column.name, beta.column.col, se.column.col)])
     EWAS <- annotateCpG(EWAS)
   }
   # Prepare a data set to match the format of the dmracte algorithm
-  DMRset        <- EWAS[,c("ID", "chr","pos",beta.val.col, p.val.col, se.val.col)]
-  DMRset$stat   <- as.numeric(as.character(DMRset[,beta.val.col]))/as.numeric(as.character(DMRset[,se.val.col]))
-  DMRset$infdr  <- p.adjust(as.numeric(as.character(DMRset[, p.val.col])), method="fdr")
+  DMRset        <- EWAS[,c("ID", "chr","pos",beta.column.col, p.column.name, se.column.col)]
+  DMRset$stat   <- as.numeric(as.character(DMRset[,beta.column.col]))/as.numeric(as.character(DMRset[,se.column.col]))
+  DMRset$infdr  <- p.adjust(as.numeric(as.character(DMRset[, p.column.name])), method="fdr")
   DMRset$betafc <- as.numeric(as.character(DMRset$mod1.CpGfcoef))
   DMRset$is.sig <- DMRset$infdr <= 0.05
 
