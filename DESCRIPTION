@@ -1,7 +1,7 @@
 Package: TKIepiR
 Type: Package
 Title: Post-EWAS analysis and visualisation pipeline
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Sebastian", "Rauschert", email = "Sebastian.Rauschert@telethonkids.org.au",
   role = c("aut", "cre"))
 Description: This package includes all steps that we perform post-EWAS in the

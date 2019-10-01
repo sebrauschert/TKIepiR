@@ -47,5 +47,5 @@ ManhattanPlot <- function(EWAS, annotate=TRUE, p.column.name=p.column.name, titl
   Mod.Man     <- data.frame(subset(Mod.Man, Mod.Man$CHR %nin% NA))
 
   # qqman Manhattan plot function
-  qqman::manhattan(Mod.Man, main=title, annotatePval = (0.05/462925),annotateTop=F, col=col.scheme)
+  qqman::manhattan(Mod.Man, main=title, annotatePval = (0.05/length(Mod.Man$P)),annotateTop=F, col=col.scheme)
 }
