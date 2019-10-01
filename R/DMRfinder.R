@@ -41,7 +41,7 @@ DMRfinder <- function(EWAS, annotate = TRUE, p.column.name = p.column.name, beta
   DMRset        <- EWAS[,c("ID", "chr","pos",beta.column.name, p.column.name, se.column.name)]
   DMRset$stat   <- as.numeric(as.character(DMRset[,beta.column.name]))/as.numeric(as.character(DMRset[,se.column.name]))
   DMRset$infdr  <- p.adjust(as.numeric(as.character(DMRset[, p.column.name])), method="fdr")
-  DMRset$betafc <- as.numeric(as.character(DMRset$mod1.CpGfcoef))
+  DMRset$betafc <- as.numeric(as.character(DMRset[,beta.column.name]))
   DMRset$is.sig <- DMRset$infdr <= 0.05
 
   # Create a list object, as this is required for DMRcate
