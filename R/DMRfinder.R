@@ -32,7 +32,7 @@ DMRfinder <- function(EWAS, annotate = TRUE, p.val.col = p.val.col, beta.val.col
     EWAS <- annotateCpG(EWAS)
   }
   if (annotate==FALSE){
-    EWAS <- as.data.frame(EWAS[,c("ID", p.column.name)])
+    EWAS <- as.data.frame(EWAS[,c("ID", p.column.name, beta.val.col, se.val.col)])
     EWAS <- annotateCpG(EWAS)
   }
   # Prepare a data set to match the format of the dmracte algorithm
