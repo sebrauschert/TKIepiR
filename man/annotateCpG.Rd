@@ -17,3 +17,6 @@ This funtion annotates the results of an EWAS with the "IlluminaHumanMethylation
 The function calls the annotation data frame from the IlluminaHumanMethylation450kanno.ilmn12.hg19 bioconductor package
 and returns a new data frame, with all the CpG, gene and location information as well as the EWAS model results
 }
+\details{
+IMPORTANT: The CpG identifier column needs to be called "ID"!
+}

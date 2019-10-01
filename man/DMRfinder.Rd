@@ -35,3 +35,6 @@ gaps >= lambda between significant CpG sites will be in separate DMRs. Support i
 This function is a wrapper for the \code{DMRcate} bioconductor package to identify differentially methylated regions.
 The input needs to be a result file from an EWAS, containing p-values, beta-coefficients and standard errors.
 }
+\details{
+IMPORTANT: The CpG identifier column needs to be called "ID"!
+}

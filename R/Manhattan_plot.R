@@ -2,7 +2,9 @@
 #'
 #'This function utilizes both the \code{annotateCpG()} function of this package, as well as the \code{qqman} CRAN package. It
 #'creates a Manhattan plot with annotated gene names based on the \code{IlluminaHumanMethylation450kanno.ilmn12.hg19} bioconductor package.
-#'
+#' 
+#' IMPORTANT: The CpG identifier column needs to be called "ID"!
+#' 
 #' @param EWAS An EWAS results data frame with columns for CpG-ID, p-value,
 #' @param annotate If TRUE (default) this will annotatate the EWAS results file with the gene and position info, using the \code{annotateCpG()} function of
 #' this package

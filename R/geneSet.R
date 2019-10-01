@@ -3,6 +3,8 @@
 #' This function is a wrapper for the \code{methylGSA} bioconductor package, which is a very easy to use method
 #' for gene set enrichment analysis
 #'
+#' IMPORTANT: The CpG identifier column needs to be called "ID"!
+#' 
 #' @param EWAS An EWAS results data frame with columns for CpG-ID, p-value, standard error and beta coefficient.
 #' @param p.val.col Columna name for the p-value in the EWAS file
 #' @param minsize Mimimum amount of genes in GO pathway
@@ -23,7 +25,7 @@ geneSet <- function(EWAS, p.val.col = p.val.col, minsize = 100, maxsize = 1000, 
   EWAS            <- subset(EWAS, as.numeric(EWAS[,p.val.col]) %nin% NA)
   cpg.pval        <- as.numeric(EWAS[, p.val.col])
   
-  names(EWAS)[1] <- "ID"
+  #names(EWAS)[1] <- "ID"
   names(cpg.pval) <- EWAS$ID
   
   # Perform the gene set enrichment analysis

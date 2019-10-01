@@ -26,3 +26,6 @@ this package}
 This function utilizes both the \code{annotateCpG()} function of this package, as well as the \code{qqman} CRAN package. It
 creates a Manhattan plot with annotated gene names based on the \code{IlluminaHumanMethylation450kanno.ilmn12.hg19} bioconductor package.
 }
+\details{
+IMPORTANT: The CpG identifier column needs to be called "ID"!
+}

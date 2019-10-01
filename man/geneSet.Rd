@@ -30,3 +30,6 @@ be included}
 This function is a wrapper for the \code{methylGSA} bioconductor package, which is a very easy to use method
 for gene set enrichment analysis
 }
+\details{
+IMPORTANT: The CpG identifier column needs to be called "ID"!
+}

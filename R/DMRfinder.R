@@ -2,7 +2,9 @@
 #'
 #' This function is a wrapper for the \code{DMRcate} bioconductor package to identify differentially methylated regions.
 #' The input needs to be a result file from an EWAS, containing p-values, beta-coefficients and standard errors.
-#'
+#' 
+#' IMPORTANT: The CpG identifier column needs to be called "ID"!
+#' 
 #' @param EWAS An EWAS results data frame with columns for CpG-ID, p-value, standard error and beta coefficient.
 #' @param annotate The default is that the
 #' @param p.val.col The name of the p-value column
