@@ -5,7 +5,7 @@
 \title{Differentially methylated regions (DMR) finder}
 \usage{
 DMRfinder(EWAS, annotate = TRUE, p.column.name = p.column.name,
-  beta.column.col = beta.column.col, se.column.col = se.column.col,
+  beta.column.name = beta.column.name, se.column.name = se.column.name,
   C = 2, lambda = 100, pcutoff = 0.001)
 }
 \arguments{
@@ -15,9 +15,9 @@ DMRfinder(EWAS, annotate = TRUE, p.column.name = p.column.name,
 
 \item{p.column.name}{The name of the p-value column}
 
-\item{beta.column.col}{The name of the beta coefficient column}
+\item{beta.column.name}{The name of the beta coefficient column}
 
-\item{se.column.col}{The name of the standard error column}
+\item{se.column.name}{The name of the standard error column}
 
 \item{C}{This is as per \code{DMRcate} package: Scaling factor for bandwidth. Gaussian kernel is calculated where lambda/C = sigma.
 Empirical testing shows that, for 450k data when lambda=1000, near- optimal prediction of sequencing-derived DMRs is obtained when C is approxi- mately 2, i.e.
