@@ -8,8 +8,6 @@ output:
     toc: yes
     toc_float: yes
     code_folding: "show"
-    template: assets/resources/template_lifecycle.html
-    css: assets/resources/html_report.css
     self_contained: true
 vignette: >
   %\VignetteIndexEntry{UserGuide}
