@@ -189,7 +189,7 @@ A volcano plot is a visual representation of the epigenetic analysis results. It
 The ```VolcanoPlot()``` function requires the following parameters:  
 
 * EWAS, as above  
-* ```annotate```: defaults to ```TRUE```  
+* ```annotate```: defaults to ```FALSE```  
 * ```p.column.name```: specify the column name containing the p-values in the EWAS results. Quotation marks are required!  
 * ```beta.column.name```: specify the column name containing the model coefficients in the EWAS results. Quotation marks are required!    
 * ```title```:  This defaults to ```"title"```; will only be needed if ```plot.it``` is set to ```TRUE``` 
@@ -197,7 +197,7 @@ The ```VolcanoPlot()``` function requires the following parameters:
 __To produce a Manhattan plot, use the following code:__
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
-VolcanoPlot(EWAS, annotate=TRUE, p.column.name = p.column.name, 
+VolcanoPlot(EWAS, annotate=FALSE, p.column.name = p.column.name, 
             beta.column.name = beta.column.name, title="title")
 
 ```
