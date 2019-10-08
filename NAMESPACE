@@ -2,6 +2,7 @@
 
 export(DMRfinder)
 export(ManhattanPlot)
+export(VolcanoPlot)
 export(annotateCpG)
 export(geneSet)
 import(Hmisc)

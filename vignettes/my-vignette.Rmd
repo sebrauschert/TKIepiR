@@ -16,5 +16,81 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+# Background for this package
+This package contains all post-EWAS steps that we conducted in the last ~2 years in the team. The functions included in this package are wrappers for the following packages:  
+
+* ```DMRcate```  
+* ```methylGSA```  
+* ```qqman```  
+* ```IlluminaHumanMethylation450kanno.ilmn12.hg19```  
+
+The functions in this packages are the following:  
+
+* ```annotateCpG()```   
+* ```DMRfinder()```  
+* ```geneSet()```  
+* ```ManhattanPlot()```  
+* ``` VolcanoPlot()```  
+
+The different steps this package is able to perform are:  
+
+* Finding differentially methylated regions  
+* Annotate the Illumina HumanMethylation450 CpG ID's with nearest gene and other information  
+* Perform gene set enrichment analysis
+* Create a Manhattan plot  
+* Create a Volcano plot  
+
+# Load the package
+
+To load the package, type the following:  
+```{r message=FALSE, warning=FALSE}
 library(TKIepiR)
 ```
+
+# First step
+
+To use this package, a EWAS result data file needs to be loaded into R. This data frame should hold information on CpG names, p-values, beta-coefficients and 
+standard errors.
+
+To load the data frame, do the following:  
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+EWAS <- readr::read_csv("path/to/csv/file/CSV_File_NAME.csv")
+```
+
+
+# ```annotateCpG()``` function
+
+This function needs the following input:  
+
+* EWAS result data frame  
+
+This data frame will have to have a column called ```ID```, which contains the cg identifier names for the CpG sites measured by the Illumina 
+HumanMethylation450 BeadChip.
+
+The function is executed in the following way:  
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+annotateCpG(EWAS)
+```
+
+This will show the results in the R console. If it is desired to save the results as a csv file, add the following to the code:  
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+annotation.data <- annotateCpG(EWAS)
+
+readr::write_cv("path/where/the/file/will/be/saved/FILE_NAME.csv")
+```
+
+
+
+# ```DMRfinder()``` function
+
+# ```geneSet()``` function  
+
+# ```ManhattanPlot()``` function
+
+# ```VolcanoPlot()``` function

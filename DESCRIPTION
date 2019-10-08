@@ -13,7 +13,8 @@ Depends: R (>= 3.5),
          methylGSA,
          qqman,
          Hmisc,
-         minfi
+         minfi,
+         ggrepel
 biocViews:
 Imports: Hmisc,
          magrittr
