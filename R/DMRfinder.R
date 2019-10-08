@@ -58,5 +58,5 @@ DMRfinder <- function(EWAS, annotate = TRUE, p.column.name = p.column.name, beta
 
   annotated$dmrcate                  <- DMRcate::dmrcate(annotated, lambda=1000, C=2, pcutoff=0.001)
   annotated$dmrcate$results.ranges   <- DMRcate::extractRanges(annotated$dmrcate, genome="hg19")
-  annotated$dmrcate$results.ranges
+  as.data.frame(annotated$dmrcate$results.ranges)
 }

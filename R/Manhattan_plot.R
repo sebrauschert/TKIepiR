@@ -15,7 +15,7 @@
 #' @return \code{ManhattanPlot} as an image.
 #' @export
 
-ManhattanPlot <- function(EWAS, annotate=TRUE, p.column.name=p.column.name, title=title, col.scheme=c("turquoise4", "springgreen4")){
+ManhattanPlot <- function(EWAS, annotate=TRUE, p.column.name=p.column.name, title="title", col.scheme=c("turquoise4", "springgreen4")){
 
   if (annotate==TRUE){
     EWAS <- as.data.frame(EWAS)

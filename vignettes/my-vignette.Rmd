@@ -1,11 +1,20 @@
 ---
 title: "TKIepiR"
-output: rmarkdown::html_vignette
-date: "`r Sys.Date()`"
+author: "Sebastian Rauschert, PhD"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+github: Hobbeist/TKIepiR
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    code_folding: "show"
+    template: assets/resources/template_lifecycle.html
+    css: assets/resources/html_report.css
+    self_contained: true
 vignette: >
-  %\VignetteIndexEntry{my-vignette}
+  %\VignetteIndexEntry{UserGuide}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+  \usepackage[utf8]{inputenc}
 ---
 
 ```{r, include = FALSE}
@@ -15,17 +24,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```
 
 # Background for this package
 This package contains all post-EWAS steps that we conducted in the last ~2 years in the team. The functions included in this package are wrappers for the following packages:  
 
-* ```DMRcate```  
-* ```methylGSA```  
-* ```qqman```  
-* ```IlluminaHumanMethylation450kanno.ilmn12.hg19```  
+* <a href="https://bioconductor.org/packages/release/bioc/html/DMRcate.html" style="color:tomato;">```DMRcate```</a>  
+* <a href="https://bioconductor.org/packages/release/bioc/html/methylGSA.html" style="color:tomato;">```methylGSA```</a>   
+* <a href="https://cran.r-project.org/web/packages/qqman/index.html" style="color:tomato;">```qqman```</a>   
+* <a href="https://bioconductor.org/packages/release/data/annotation/html/IlluminaHumanMethylation450kanno.ilmn12.hg19.html" style="color:tomato;">```IlluminaHumanMethylation450kanno.ilmn12.hg19```</a>     
 
 The functions in this packages are the following:  
 
@@ -46,7 +55,7 @@ The different steps this package is able to perform are:
 # Load the package
 
 To load the package, type the following:  
-```{r message=FALSE, warning=FALSE}
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 library(TKIepiR)
 ```
 
@@ -82,15 +91,116 @@ This will show the results in the R console. If it is desired to save the result
 ```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 annotation.data <- annotateCpG(EWAS)
 
-readr::write_cv("path/where/the/file/will/be/saved/FILE_NAME.csv")
+readr::write_csv(annotation.data,"path/where/the/file/will/be/saved/FILE_NAME.csv")
 ```
 
 
 
-# ```DMRfinder()``` function
+# ```DMRfinder()``` function  
+
+The ```DMRfinder()``` function will find differentially methylated regions. To use the function, the following parameters are necessary:  
+
+* EWAS result data frame (as above, same format)  
+* ```annotate```: default is ```TRUE```   
+* ```p.column.name```: specify the column name containing the p-values in the EWAS results. Quotation marks are required! 
+* ```beta.column.name```: specify the column name containing the model coefficients in the EWAS results. Quotation marks are required!    
+* ```se.column.name```: specify the column name containing the standard errors in the EWAS results. Quotation marks are required! 
+* ```C```: default is 2, as per ```DMRcate``` package  
+* ```lambda```: default is 100, as per ```DMRcate``` package
+* ```pcutoff```: default is 0.001, as per ```DMRcate``` package
+
+__About ```C```:__  
+Scaling factor for bandwidth. Gaussian kernel is calculated where lambda/C = sigma.
+Empirical testing shows that, for 450k data when lambda=1000, near- optimal prediction of sequencing-derived DMRs is obtained when C is approxi- mately 2, i.e.
+1 standard deviation of Gaussian kernel = 500 base pairs. Should be a lot larger for sequencing data - suggest C=50. Cannot be < 0.2  
+
+__About ```lambda```:__  
+This is according to the \code{DMRcate} package: Gaussian kernel bandwidth for smoothed-function estimation. Also informs DMR bookend definition;
+gaps >= lambda between significant CpG sites will be in separate DMRs. Support is truncated at 5*lambda. Default is 1000 nucleotides. See details for further info.
+
+
+__To perform the analysis, use the following code:__  
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+DMRfinder(EWAS, annotate = TRUE, p.column.name = p.column.name, 
+          beta.column.name = beta.column.name, se.column.name = se.column.name, 
+          C = 2, lambda = 100, pcutoff = 0.001)
+```
+
+Again, this will show the results in the R console. If it is desired to save the results as a csv file, add the following to the code:  
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+DMR.results <- DMRfinder(EWAS, annotate = TRUE, 
+                         p.column.name = p.column.name, 
+                         beta.column.name = beta.column.name, 
+                         se.column.name = se.column.name, 
+                         C = 2, lambda = 100, pcutoff = 0.001)
+
+readr::write_csv(DMR.results,"path/where/the/file/will/be/saved/FILE_NAME.csv")
+```
+
 
 # ```geneSet()``` function  
 
+For the ```geneSet()``` function, the following parameters are required to perform gene set enrichment analysis:  
+
+* EWAS (data frame as above)  
+* ```p.column.name```: specify the column name containing the p-values in the EWAS results. Quotation marks are required!  
+* ```minsize```: defaults to ```100``` genes per gene set  
+* ```maxsize```: defaults to ```1000``` genes per gene set 
+* ```sig.cut```: this defaults tio a p-value significance cut-off of 0.001  
+* ```plottitle```: This defaults to ```"title"```; will only be needed if ```plot.it``` is set to ```TRUE```
+* ```plot.it```: defaults to ```FALSE```; if set ```TRUE```, a heatmap style barplot will be printed, indicating the significance of the gene sets  
+
+__About ```minsize``` and ```maxsize```:__  
+for gene set enrichment analysis, it has been shown that performance is poor with too little or too large amounts of genes per gene set. Hence it is available to control the amount of genes within the gene sets. Advicable not to change the default.  
+
+__To perform the analysis, use the following code:__
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+geneSet(EWAS, p.column.name = p.column.name, minsize = 100, 
+        maxsize = 1000, sig.cut = 0.001, plottitle="title", plot.it=FALSE)
+```
+
+
 # ```ManhattanPlot()``` function
 
+A manhattan plot is a visual representation of the p-values and significance of an epigeneome wide association study (EWAS). It
+shows information on the chromosome the CpGs are located and can be annotated by the nearest genes.
+
+The ```ManhattanPlot()``` function requires the following input:  
+
+* EWAS, as above  
+* ```annotate```: defaults to ```TRUE```  
+* ```p.column.name```: specify the column name containing the p-values in the EWAS results. Quotation marks are required!     
+* ```title```:  This defaults to ```"title"```; will only be needed if ```plot.it``` is set to ```TRUE``` 
+* ```col.scheme```: this defaults to ```c("turquoise4", "springgreen4")```. If different colors are desired, change the two color names according to R and html standards  
+
+__To produce a Manhattan plot, use the following code:__
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+ManhattanPlot(EWAS, annotate=TRUE, p.column.name=p.column.name, 
+              title="title", col.scheme=c("turquoise4", "springgreen4"))
+```
+
+
 # ```VolcanoPlot()``` function
+
+A volcano plot is a visual representation of the epigenetic analysis results. It includes the effect size and the p-values of the regression model that was performed. Usually the coefficients or effect sizes are plotted on the x-axis and the p-values are plotted on the y-axis. 
+
+The ```VolcanoPlot()``` function requires the following parameters:  
+
+* EWAS, as above  
+* ```annotate```: defaults to ```TRUE```  
+* ```p.column.name```: specify the column name containing the p-values in the EWAS results. Quotation marks are required!  
+* ```beta.column.name```: specify the column name containing the model coefficients in the EWAS results. Quotation marks are required!    
+* ```title```:  This defaults to ```"title"```; will only be needed if ```plot.it``` is set to ```TRUE``` 
+
+__To produce a Manhattan plot, use the following code:__
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+VolcanoPlot(EWAS, annotate=TRUE, p.column.name = p.column.name, 
+            beta.column.name = beta.column.name, title="title")
+
+```
+

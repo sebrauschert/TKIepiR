@@ -1,0 +1,159 @@
+
+body {
+  background-color : #FFFFFF ;
+  font-family: "Proxima Nova Light", Helvetica, sans-serif;
+  color: #265992;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 84px;
+}
+
+h1 {
+  margin-top: 1em;
+  font-size: 2em;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+h2 {
+  margin-top: 0.75em;
+  font-size: 1.6em;
+  text-transform: capitalize;
+}
+
+h3 {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+table {
+  font-size: 80%;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1.title {
+  text-align: center;
+}
+
+pre {
+    border: 0px solid #cccccc;
+    border-radius: 0px;
+ }
+
+.proxima-nova-soft-bold {
+  font-family: "Proxima Nova Soft Bold", Helvetica, sans-serif;
+}
+.proxima-nova-soft-medium {
+  font-family: "Proxima Nova Soft Medium", Helvetica, sans-serif;
+}
+
+.proxima-nova-soft-regular {
+  font-family: "Proxima Nova Soft Regular", Helvetica, sans-serif;
+}
+
+.proxima-nova-soft-semibold {
+  font-family: "Proxima Nova Soft Semibold", Helvetica, sans-serif;
+}
+
+.translucent {
+  background: white;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0 2em 1em 2em;
+  margin: 2em 0 2em 0;
+}
+
+.vertical-spacer {
+  height: 1em;
+}
+
+.white {
+  color: white;
+  margin-top: 0;
+}
+
+
+
+
+
+
+/* ---------- Links ----------------- */
+a {
+  color: #265992;
+}
+a:hover {
+  color: #265992;
+}
+
+
+
+
+/* ---------- TOC ----------------- */
+#TOC {
+  top: 40%;
+  position: fixed;
+  width: 210px;
+}
+.tocify {
+  border: none;
+  color: grey;
+  border-radius: 0px;
+}
+.list-group-item.active {
+    color: #265992;
+    background-color: white;
+    border-left: solid;
+    border-color: #265992;
+}
+.list-group-item:hover {
+    color: #265992;
+    background-color: white;
+    border-left: solid;
+    border-color: #265992;
+}
+.tocify-extend-page {
+  display: none;
+}
+
+/* ------ This is just to fix the bug on Safari where table of content is on top of content */
+.toc-content {
+  margin-left: 210px
+}
+
+/* ------ Don't display on small media */
+
+
+
+/* ---------- Button ----------------- */
+.btn {
+    border-width: 0 0px 0px 0px;
+    font-weight: normal;
+    text-transform: ;
+    color: #265992;
+}
+.btn-default {
+    color: #265992;
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    background-color: #265992;
+}
+
+body {
+text-align: justify
+}
+
+#TOC {
+  top: 1%;
+  opacity: 0.5;
+}
+#TOC:hover {
+  opacity: 1;
+}
