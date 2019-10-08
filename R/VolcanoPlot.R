@@ -10,7 +10,7 @@
 #' this package
 #' @param p.column.name This specifies the column for the model p-value in the EWAS result file
 #' @param beta.column.name The name of the beta coefficient column
-#' @param title Specify a title for the Manhattan plot
+#' @param title Specify a title for the Volcano plot
 #' @return \code{VolcanoPlot} as an image.
 #' @export
 
@@ -27,8 +27,8 @@ VolcanoPlot <- function(EWAS, annotate=TRUE, p.column.name = p.column.name, beta
     EWAS <- annotateCpG(EWAS)
   }
   
-  EWAS[,p.column.name] <- as.numeric(EWAS[,p.column.name])
-  EWAS[,beta.column.name] <- as.numeric(EWAS[,beta.column.name])
+  EWAS[,p.column.name] <- as.numeric(as.character(EWAS[,p.column.name]))
+  EWAS[,beta.column.name] <- as.numeric(as.character(EWAS[,beta.column.name]))
   
   # Create a column indicating Bonferroni significance so it can be color coded in the volcano plot
   EWAS$SIGNI <- ifelse((EWAS[,p.column.name] < 0.05/length(EWAS[,p.column.name])),"significant","not significant")
@@ -48,6 +48,7 @@ VolcanoPlot <- function(EWAS, annotate=TRUE, p.column.name = p.column.name, beta
       force=10, size=2) +
     labs(y= expression(beta*-Coefficient), x=expression(-log[10](italic(p))), color="Bonferroni corrected:") +
     
-    coord_flip() 
+    coord_flip() +
+    ggtitle(title)
   
 }

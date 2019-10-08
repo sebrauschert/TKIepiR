@@ -17,7 +17,7 @@ this package}
 
 \item{beta.column.name}{The name of the beta coefficient column}
 
-\item{title}{Specify a title for the Manhattan plot}
+\item{title}{Specify a title for the Volcano plot}
 }
 \value{
 \code{VolcanoPlot} as an image.
