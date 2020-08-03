@@ -15,7 +15,7 @@
 #' 1 standard deviation of Gaussian kernel = 500 base pairs. Should be a lot larger for sequencing data - suggest C=50. Cannot be < 0.2
 #' @param lambda This is according to the \code{DMRcate} package: Gaussian kernel bandwidth for smoothed-function estimation. Also informs DMR bookend definition;
 #' gaps >= lambda between significant CpG sites will be in separate DMRs. Support is truncated at 5*lambda. Default is 1000 nucleotides. See details for further info.
-#' @param pcutoff P-value threshold for selecting significan DMRs
+#' @param pcutoff P-value threshold for selecting significan DMRs. Defaults to the DMRcate packages default "fdr"
 #' @import IlluminaHumanMethylation450kanno.ilmn12.hg19
 #' @import Hmisc
 #' @importFrom DMRcate dmrcate extractRanges
@@ -23,7 +23,7 @@
 #' @export
 
 
-DMRfinder <- function(EWAS, annotate = TRUE, p.column.name = p.column.name, beta.column.name = beta.column.name, se.column.name = se.column.name, C = 2, lambda = 100, pcutoff = 0.001){
+DMRfinder <- function(EWAS, annotate = TRUE, p.column.name = p.column.name, beta.column.name = beta.column.name, se.column.name = se.column.name, C = 2, lambda = 100, pcutoff = "fdr"){
   
   ## In the same source file (to remind you that you did it) add:
   #if(getRversion() >= "2.15.1")  utils::globalVariables("naresid.omit")
@@ -56,7 +56,7 @@ DMRfinder <- function(EWAS, annotate = TRUE, p.column.name = p.column.name, beta
   annotated <- annotated[order(annotated$CHR, annotated$pos),]
   class(annotated) <- "annot"
 
-  annotated$dmrcate                  <- DMRcate::dmrcate(annotated, lambda=1000, C=2, pcutoff=0.001)
+  annotated$dmrcate                  <- DMRcate::dmrcate(annotated, lambda=lambda, C=C, pcutoff=pcutoff)
   annotated$dmrcate$results.ranges   <- DMRcate::extractRanges(annotated$dmrcate, genome="hg19")
   as.data.frame(annotated$dmrcate$results.ranges)
 }
