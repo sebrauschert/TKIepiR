@@ -4,8 +4,13 @@
 \alias{ManhattanPlot}
 \title{Create a Manhattan plot}
 \usage{
-ManhattanPlot(EWAS, annotate = TRUE, p.column.name = p.column.name,
-  title = "title", col.scheme = c("turquoise4", "springgreen4"))
+ManhattanPlot(
+  EWAS,
+  annotate = TRUE,
+  p.column.name = p.column.name,
+  title = "title",
+  col.scheme = c("turquoise4", "springgreen4")
+)
 }
 \arguments{
 \item{EWAS}{An EWAS results data frame with columns for CpG-ID, p-value,}

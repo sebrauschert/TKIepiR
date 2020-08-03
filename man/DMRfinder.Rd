@@ -4,9 +4,16 @@
 \alias{DMRfinder}
 \title{Differentially methylated regions (DMR) finder}
 \usage{
-DMRfinder(EWAS, annotate = TRUE, p.column.name = p.column.name,
-  beta.column.name = beta.column.name, se.column.name = se.column.name,
-  C = 2, lambda = 100, pcutoff = 0.001)
+DMRfinder(
+  EWAS,
+  annotate = TRUE,
+  p.column.name = p.column.name,
+  beta.column.name = beta.column.name,
+  se.column.name = se.column.name,
+  C = 2,
+  lambda = 100,
+  pcutoff = "fdr"
+)
 }
 \arguments{
 \item{EWAS}{An EWAS results data frame with columns for CpG-ID, p-value, standard error and beta coefficient.}
@@ -26,7 +33,7 @@ Empirical testing shows that, for 450k data when lambda=1000, near- optimal pred
 \item{lambda}{This is according to the \code{DMRcate} package: Gaussian kernel bandwidth for smoothed-function estimation. Also informs DMR bookend definition;
 gaps >= lambda between significant CpG sites will be in separate DMRs. Support is truncated at 5*lambda. Default is 1000 nucleotides. See details for further info.}
 
-\item{pcutoff}{P-value threshold for selecting significan DMRs}
+\item{pcutoff}{P-value threshold for selecting significan DMRs. Defaults to the DMRcate packages default "fdr"}
 }
 \value{
 \code{DMRfinder} as a data table.
