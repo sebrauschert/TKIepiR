@@ -54,7 +54,10 @@ DMRfinder <- function(EWAS, annotate = TRUE, p.column.name = p.column.name, beta
                           indfdr = model$infdr, is.sig=model$infdr < 0.05)
 
   annotated <- annotated[order(annotated$CHR, annotated$pos),]
-  class(annotated) <- "annot"
+  #class(annotated) <- "annot"
+  
+  # The newest version of dmrcate calls the object CpGannotated rather than annot.
+  class(annotated) <- "CpGannotated"
 
   annotated$dmrcate                  <- DMRcate::dmrcate(annotated, lambda=lambda, C=C, pcutoff=pcutoff)
   annotated$dmrcate$results.ranges   <- DMRcate::extractRanges(annotated$dmrcate, genome="hg19")
